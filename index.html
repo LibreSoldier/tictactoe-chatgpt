@@ -51,6 +51,13 @@
   <button onclick="toggleTheme()">Toggle Theme</button>
   <button onclick="resetGame()">Reset</button>
 </div>
+<div>
+  <label>Who starts?</label>
+  <select id="starter" onchange="resetGame()">
+    <option value="X">You (X)</option>
+    <option value="O">AI (O)</option>
+  </select>
+</div>
 <div id="board"></div>
 <p id="status"></p>
 <script>
@@ -60,6 +67,7 @@
 
   const boardElement = document.getElementById('board');
   const statusElement = document.getElementById('status');
+  const starterSelect = document.getElementById('starter');
 
   function createBoard() {
     boardElement.innerHTML = '';
@@ -153,10 +161,11 @@
 
   function resetGame() {
     board = ["", "", "", "", "", "", "", "", ""];
-    currentPlayer = "X";
+    currentPlayer = starterSelect.value;
     gameOver = false;
     statusElement.textContent = "";
     createBoard();
+    if (currentPlayer === "O") aiMove();
   }
 
   createBoard();
