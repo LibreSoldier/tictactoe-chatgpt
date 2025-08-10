@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Tic Tac Toe with AI & Theme</title>
 <style>
   body {
@@ -46,20 +46,20 @@
 </style>
 </head>
 <body class="light">
-<h1>Tic Tac Toe</h1>
-<div>
-  <button onclick="toggleTheme()">Toggle Theme</button>
-  <button onclick="resetGame()">Reset</button>
-</div>
-<div>
-  <label>Who starts?</label>
-  <select id="starter" onchange="resetGame()">
-    <option value="X">You (X)</option>
-    <option value="O">AI (O)</option>
-  </select>
-</div>
-<div id="board"></div>
-<p id="status"></p>
+  <h1>Tic Tac Toe</h1>
+  <div>
+    <button onclick="toggleTheme()">Toggle Theme</button>
+    <button onclick="resetGame()">Reset</button>
+  </div>
+  <div>
+    <label>Who starts?</label>
+    <select id="starter" onchange="resetGame()">
+      <option value="X">You (X)</option>
+      <option value="O">AI (O)</option>
+    </select>
+  </div>
+  <div id="board"></div>
+  <p id="status"></p>
 <script>
   let board = ["", "", "", "", "", "", "", "", ""];
   let currentPlayer = "X";
@@ -165,10 +165,22 @@
     gameOver = false;
     statusElement.textContent = "";
     createBoard();
-    if (currentPlayer === "O") aiMove();
+
+    if (currentPlayer === "O") {
+      // AI always starts in the middle cell
+      if (board.every(cell => cell === "")) {
+        board[4] = "O"; // center cell
+        currentPlayer = "X"; // switch to player
+        createBoard();
+        statusElement.textContent = "Your turn";
+      } else {
+        aiMove();
+      }
+    }
   }
 
   createBoard();
 </script>
 </body>
 </html>
+
